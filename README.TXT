@@ -1,8 +1,12 @@
+This is a demo using Long Beach, California's 2013 Flu Shot Clinics as listed at http://www.longbeach.gov/news/displaynews.asp?NewsID=6660&targetid=51.
+
+[Much of the below is from tkompare's flushots2013. TODO: Update README. –Fureigh]
+
 I have again partnered with the Chicago Department of Public Health (CDPH) to create an updated flu shot finder web application. Currently it has all the CDPH free locations and events. It also includes Walgreens, Dominick's, Jewel/Osco, and CVS locations that offer flu shots.
 
 I created this as a volunteer effort. The code that runs it is open, completely free, and reusable by anyone.
 
-Special thanks to Smart Chicago Collaborative for hosting this thing. Also thanks to Raed Mansour, Dr. Julie Morita, and Commissioner Dr. Bechara Choucair (all with CDPH) for being great to work with.
+Special thanks to Tom Kompare of Chicago, who created chicagoflushots (https://github.com/tkompare/flushots2013).
 
 NOTES:
 
