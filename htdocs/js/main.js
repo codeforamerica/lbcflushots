@@ -13,7 +13,7 @@
 		// Google Fusion Tables URI
 		fturl:'https://www.googleapis.com/fusiontables/v1/query',
 		// Google maps API key
-		googlemapsapikey:'AIzaSyDRVus9kkg8mr6M7EZUmXZsdoM7JSFbvC8', // @todo: Doublecheck.
+		googlemapsapikey:'AIzaSyCAHmQb39GC3g29-IUUCB1Qtp9PjpwXcQ4',
 		// Icon for other for-fee events
 		iconfee:'/img/red.png',
 		// Icon for Free events
@@ -51,8 +51,8 @@
 		// Zoom for finding address
 		zoomaddress:14
 	};
-	
-	/* 
+
+	/*
 	 * jQuery's 'on document ready' function
 	 * Run this after the DOM is fully loaded.
 	 */
@@ -69,17 +69,17 @@
 			styles:Default.styles,
 			zoom:Default.zoom
 		}); // END Map object constructor
-		
+
 		/**
 		 * The Flushot application object
 		 */
 		var Flu = new Flushots(Default.infoboxoptions);
-		
+
 		var LegendDiv = document.createElement('div');
 		Flu.setMapLegend(LegendDiv,Map,Flu,Default);
 		LegendDiv.index = 1;
 		Map.Map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(LegendDiv);
-		
+
 		if(Flu.geolocate)
 		{
 			var FindMeDiv = document.createElement('div');
@@ -87,7 +87,7 @@
 			FindMeDiv.index = 1;
 			Map.Map.controls[google.maps.ControlPosition.TOP_RIGHT].push(FindMeDiv);
 		}
-		
+
 		// Get the flu shot event data from the Google Fusion Table
 		var EventsFT = new FusionTable(Default.fturl,Default.eventquery,Default.googlemapsapikey);
 		$.getJSON(EventsFT.url, {
@@ -104,9 +104,9 @@
 		.fail(function(){
 			alert('Oh, no! We are having trouble getting the information we need from storage.');
 		});
-		
+
 		$('#nav-all').click(function(){
-			
+
 			// Change the UI
 			$('#nav-li-days,#nav-li-seven,.day-btn').removeClass('active');
 			$('#nav-li-all').addClass('active');
@@ -115,15 +115,15 @@
 			{
 				$('#navbar-button').click();
 			}
-			
+
 			// Selected today's events
 			Flu.setMarkersByDay('all');
-			
+
 		}); // END Day dropup listener
-		
+
 		// Seven Day listener
 		$('#nav-seven').click(function(){
-			
+
 			// Change the UI
 			$('#nav-li-days,#nav-li-all,.day-btn').removeClass('active');
 			$('#nav-li-seven').addClass('active');
@@ -132,17 +132,17 @@
 			{
 				$('#navbar-button').click();
 			}
-			
+
 			// Selected today's events
 			Flu.setMarkersByDay('seven');
-			
+
 		}); // END 7 day listener
-		
+
 		/*
 		 * The Day dropup list listener
 		 */
 		$('.day').click(function(){
-			
+
 			// Change the UI
 			$('#nav-li-all,#nav-li-seven').removeClass('active');
 			$('#nav-li-days').addClass('active');
@@ -151,12 +151,12 @@
 			{
 				$('#navbar-button').click();
 			}
-			
+
 			// Select the day's events
 			Flu.setMarkersByDay($(this).text());
-			
+
 		}); // END Day dropup listener
-		
+
 		$('#nav-address').change(function(){
 			if($(this).val().length === 0)
 			{
@@ -166,7 +166,7 @@
 				}
 			}
 		});
-		
+
 		// Go button listener
 		$('#nav-go').click(function(){
 			$('#nav-address').blur();
@@ -212,7 +212,7 @@
 								{
 									$('#navbar-button').click();
 								}
-								
+
 								// Mask the exact address before recording
 								// Example: '1456 W Greenleaf Ave' becomes '1400 W Greenleaf Ave'
 								var addarray = $.trim($('#nav-address').val()).split(' ');
@@ -231,7 +231,7 @@
 								}
 								var maskedAddress = addarray.join(' ');
 								_gaq.push(['_trackEvent', 'Go Button', 'Address', maskedAddress]);
-								
+
 							}
 							else
 							{
@@ -253,7 +253,7 @@
 				alert('Please enter a '+Default.city+' street address in the box next to the "Go" button in the bottom navigation bar.');
 			}
 		}); // END Go button listener
-		
+
 		// Listen for clicks on "directions" links in the location pop-ups.
 		$('body').on('click','.directions',function(){
 			var theurl = 'http://www.google.com/maps?';
@@ -264,6 +264,6 @@
 			theurl += 'daddr='+this.Events[i].data.street1+' '+this.Events[i].data.city+', '+this.Events[i].data.state+' '+this.Events[i].data.postal_code;
 			window.open(theurl);
 		});
-		
+
 	}); // END jQuery on document ready
 })(jQuery,TkMap,FusionTable,Flushots);
